@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "test": "npm test",
-    "sample:ingest": "node sample/exampleOutput | node bin/tracktastic --log fixtures"
+    "sample:ingest": "node sample/exampleOutput | node bin/tracktastic --ingest --folder sample",
+    "sample:report": "node bin/tracktastic --report --folder sample"
   },
   "repository": {
     "type": "git",
