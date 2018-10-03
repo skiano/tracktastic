@@ -73,13 +73,14 @@ const readLogFile = (logFile) => new Promise((resolve, reject) => {
     if (!input.trim()) return
 
     try {
-      const [encodedName, encodedTime, encodedData] = input.split(SEPARATOR);
+      const [encodedName, encodedTime, encodedData, encodedUnit] = input.split(SEPARATOR);
       const name = fromBase64(encodedName);
       const time = timestamp.parse(encodedTime);
       const data = parseFloat(encodedData, 10);
+      const unit = fromBase64(encodedUnit);
 
       if (!dataSet[name]) dataSet[name] = [];
-      dataSet[name].push({ time, data });
+      dataSet[name].push({ time, data, unit });
     } catch (_) {}
   });
 });
