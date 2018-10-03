@@ -6,6 +6,10 @@
   "bin": {
     "tracktastic": "tracktastic.js"
   },
+  "files": [
+    "bin/*",
+    "src/*"
+  ],
   "scripts": {
     "test": "npm test",
     "sample:ingest": "node sample/exampleOutput | node bin/tracktastic --log fixtures"
