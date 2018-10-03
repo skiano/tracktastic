@@ -44,7 +44,7 @@ const gangUpTables = (tables, columns) => {
   }).join(NEW_LINE + NEW_LINE);
 };
 
-const makeSingleTable = (name, values, maxLineLength = 8) => {
+const makeSingleTable = (name, values, maxLineLength) => {
   const minData = min(values, 'data');
   const maxData = max(values, 'data');
 
@@ -78,7 +78,7 @@ const reportMarkdown = (dataSet, options) => {
   options = Object.assign({
     maxRows: 10,
     maxColumns: 3,
-    barLength: 20,
+    barLength: 15,
     title: 'Tracktastic!'
   }, options);
 
