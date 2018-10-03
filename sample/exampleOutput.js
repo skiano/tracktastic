@@ -1,6 +1,6 @@
 console.log(JSON.stringify([
-  { name: 'file1.js', value: Math.random() * 10, unit: 'ms' },
-  { name: 'css/another.css', value: Math.random() * 10, unit: 'ms' },
-  { name: 'something.txt', value: Math.random() * 100, unit: 'ms' },
-  { name: 'super/duper/deep/something.txt', value: Math.random() * 100, unit: 'ms' },
+  { name: 'value 1', value: Math.random() * 200, unit: 'ms' },
+  { name: 'value 2', value: Math.random() * 10, unit: 'ms' },
+  { name: 'value 3', value: Math.random() * 100, unit: 'ms' },
+  { name: 'value 4', value: Math.random() * 100, unit: 'ms' },
 ]));
