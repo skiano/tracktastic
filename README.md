@@ -1,3 +1,5 @@
+_PLEASE NOTE_ this has not reached a minimal release
+
 # tracktastic
 
 Tracktastic is a minimal-dependency tool that helps you track numeric values that change over time.
