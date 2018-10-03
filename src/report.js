@@ -44,7 +44,7 @@ const gangUpTables = (tables, columns) => {
   }).join(NEW_LINE + NEW_LINE);
 };
 
-const makeSingleTable = (name, values, maxLineLength = 10) => {
+const makeSingleTable = (name, values, maxLineLength = 8) => {
   const minData = min(values, 'data');
   const maxData = max(values, 'data');
 
