@@ -6,4 +6,4 @@ Values could be performance benchmarks or build sizes or anything really. Genera
 
 ### dependencies
 
-- [`text-table`](https://www.npmjs.com/package/text-table) a zero-dependency utility for creating ascii tablualar data used internally byt the default reporter.
+- [`text-table`](https://www.npmjs.com/package/text-table) a zero-dependency utility for creating ascii tablualar data used internally by the default reporter.
