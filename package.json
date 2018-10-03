@@ -1,0 +1,32 @@
+{
+  "name": "tracktastic",
+  "version": "1.0.0",
+  "description": "Track numeric values in your repo over time with minimal dependencies (eg, build sizes)",
+  "main": "src/index.js",
+  "bin": {
+    "tracktastic": "tracktastic.js"
+  },
+  "scripts": {
+    "test": "npm test",
+    "sample:ingest": "node sample/exampleOutput | node bin/tracktastic --log fixtures"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skiano/tracktastic.git"
+  },
+  "keywords": [
+    "build",
+    "tool",
+    "sizes",
+    "monitoring"
+  ],
+  "author": "Greg Skiano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skiano/tracktastic/issues"
+  },
+  "homepage": "https://github.com/skiano/tracktastic#readme",
+  "dependencies": {
+    "text-table": "0.2.0"
+  }
+}
