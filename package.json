@@ -12,9 +12,9 @@
   ],
   "scripts": {
     "test": "npm test",
-    "sample:ingest": "node sample/exampleOutput | node bin/tracktastic --ingest --folder sample",
+    "sample:ingest": "node sample/exampleOutput | node bin/tracktastic --folder sample --ingest",
     "sample:report": "node bin/tracktastic --report --folder sample",
-    "sample": "npm run sample:ingest && npm run sample:report"
+    "sample": "node sample/exampleOutput | node bin/tracktastic --folder sample"
   },
   "repository": {
     "type": "git",

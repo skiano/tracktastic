@@ -4,38 +4,43 @@ const path = require('path');
 const readline = require('readline');
 const tracktastic = require('../src');
 
-const folder = process.argv[process.argv.findIndex(a => a === '--folder') + 1] || '';
+const folder = process.argv[process.argv.findIndex(a => a === '--folder') + 1] || 'tracktastic';
 const folderPath = path.resolve(process.cwd(), folder);
-const logFilePath = path.resolve(folderPath, '.tracktastic');
-const reportFilePath = path.resolve(folderPath, 'README.md');
+const shouldIngest = process.argv.includes('--ingest');
+const shouldReport = process.argv.includes('--report');
 
-const ingest = async () => {
+const report = async () => {
+  await tracktastic.report(folderPath);
+};
+
+const ingest = () => new Promise((resolve, reject) => {
   const rl = readline.createInterface({ input: process.stdin });
 
   rl.on('line', async (line) => {
     try {
-      await tracktastic.ingest(logFilePath, JSON.parse(line));
+      await tracktastic.ingest(folderPath, JSON.parse(line));
+      resolve();
     } catch (error) {
-      if (error.code === 'ENOENT') {
-        console.log(`could not write to '${logFilePath}'`)
-      }
+      reject(error);
     }
   });
 
-  rl.on('error', (e) => {
-    console.error(e);
-    process.exit(1);
-  })
-};
+  rl.on('error', reject);
+});
 
-const report = async () => {
-  await tracktastic.report(logFilePath, reportFilePath);
-};
-
-if (process.argv.includes('--ingest')) {
-  ingest();
+const main = async () => {
+  try {
+    if (shouldIngest) {
+      await ingest();
+    } else if (shouldReport) {
+      await report();
+    } else {
+      await ingest();
+      await report();
+    }
+  } catch (e) {
+    console.log(e);
+  }
 }
 
-if (process.argv.includes('--report')) {
-  report();
-}
+main();
