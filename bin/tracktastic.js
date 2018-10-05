@@ -14,6 +14,13 @@ const report = async () => {
 };
 
 const ingest = () => new Promise((resolve, reject) => {
+  if (process.stdin.isTTY) {
+    console.log('ingest expects piped input');
+    return resolve();
+  }
+
+  process.stdin.setEncoding('utf8');
+
   const rl = readline.createInterface({ input: process.stdin });
 
   rl.on('line', async (line) => {
