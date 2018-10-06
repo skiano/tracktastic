@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
-const report = require('./report');
 const logFile = require('./logFile');
 const timestamp = require('./timestamp');
 const getOptions = require('./getOptions');
@@ -35,7 +34,14 @@ exports.report = async (folder) => {
   const dataSet = await logFile.read(log);
 
   await Promise.all(options.output.map(async (reportOptions) => {
-    const out = path.resolve(folder, reportOptions.name || 'README.md');
-    await writeFile(out, report(dataSet, reportOptions));
+    reportOptions = Object.assign({
+      name: 'README.md',
+      reporter: require('./report') // make this variable
+    }, reportOptions);
+
+    const out = path.resolve(folder, reportOptions.name);
+    const reportString = reportOptions.reporter(dataSet, reportOptions);
+
+    await writeFile(out, reportString);
   }))
 };
