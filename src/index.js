@@ -35,11 +35,12 @@ exports.report = async (folder) => {
 
   await Promise.all(options.output.map(async (reportOptions) => {
     reportOptions = Object.assign({
-      name: 'README.md',
+      file: 'README.md',
+      title: 'Tracktastic',
       reporter: require('./report') // make this variable
     }, reportOptions);
 
-    const out = path.resolve(folder, reportOptions.name);
+    const out = path.resolve(folder, reportOptions.file);
     const reportString = reportOptions.reporter(dataSet, reportOptions);
 
     await writeFile(out, reportString);

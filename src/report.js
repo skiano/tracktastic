@@ -79,7 +79,6 @@ const reportMarkdown = (dataSet, options) => {
     maxRows: 10,
     maxColumns: 3,
     barLength: 15,
-    title: 'Tracktastic!'
   }, options);
 
   const names = Object.keys(dataSet).sort(sortNames);

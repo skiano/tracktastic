@@ -4,8 +4,8 @@ module.exports = {
   },
   report: {
     output: [
-      { name: 'README.md' },
-      { name: 'ANOTHER.md' }
+      { file: 'README.md' },
+      { file: 'ANOTHER.md', title: 'Custom Title' }
     ]
   }
 };

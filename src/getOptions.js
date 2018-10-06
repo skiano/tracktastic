@@ -10,9 +10,7 @@ const ingest = {
 };
 
 const report = {
-  output: [
-    { name: 'README.md' }
-  ]
+  output: [{}]
 };
 
 let cached;
