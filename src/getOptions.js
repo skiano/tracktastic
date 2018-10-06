@@ -1,7 +1,12 @@
 const path = require('path');
 
+const identity = _ => _;
+
 const ingest = {
-  createName: mark => mark.name,
+  createType: mark => mark.type,
+  createName: identity,
+  createUnit: identity,
+  createValue: identity
 };
 
 const report = {
