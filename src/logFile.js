@@ -13,36 +13,26 @@ const toBase64 = v => Buffer.from(v).toString('base64');
 const fromBase64 = v => Buffer.from(v, 'base64').toString('utf8');
 
 const validateMark = (mark) => {
-  if (typeof mark.value !== 'number') {
-    throw new assert.AssertionError({
-      message: '`mark.value` must be a number',
-      actual: JSON.stringify(mark),
-      expected: Number,
-    });
-  }
+  assert(
+    typeof mark.value === 'number',
+    `'mark.value' must be a number`
+  );
 
-  if (!(new Date(mark.time)).getTime() > 0) {
-    throw new assert.AssertionError({
-      message: '`mark.time` must be a valid timestamp',
-      actual: JSON.stringify(mark),
-      expected: String,
-    });
-  }
+  assert(
+    (new Date(mark.time)).getTime() > 0,
+    `'mark.time' must be a valid timestamp`
+  );
 
-  if (typeof mark.name !== 'string') {
-    throw new assert.AssertionError({
-      message: '`mark.name` must be strings',
-      actual: JSON.stringify(mark),
-      expected: String,
-    });
-  }
+  assert(
+    typeof mark.name === 'string',
+    `'mark.name' must be a string`
+  );
 
-  if (mark.unit && typeof mark.unit !== 'string') {
-    throw new assert.AssertionError({
-      message: '`mark.unit` must be a string',
-      actual: JSON.stringify(mark),
-      expected: String,
-    });
+  if (mark.unit) {
+    assert(
+      typeof mark.unit === 'string',
+      '`mark.unit` must be a string'
+    )
   }
 };
 

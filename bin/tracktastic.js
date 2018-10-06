@@ -9,33 +9,35 @@ const folderPath = path.resolve(process.cwd(), folder);
 const shouldIngest = process.argv.includes('--ingest');
 const shouldReport = process.argv.includes('--report');
 
-const report = async () => {
+async function report() {
   await tracktastic.report(folderPath);
-};
+}
 
-const ingest = () => new Promise((resolve, reject) => {
-  if (process.stdin.isTTY) {
-    console.log('ingest expects piped input');
-    return resolve();
-  }
-
-  process.stdin.setEncoding('utf8');
-
-  const rl = readline.createInterface({ input: process.stdin });
-
-  rl.on('line', async (line) => {
-    try {
-      await tracktastic.ingest(folderPath, JSON.parse(line));
-      resolve();
-    } catch (error) {
-      reject(error);
+async function ingest() {
+  return new Promise((resolve, reject) => {
+    if (process.stdin.isTTY) {
+      console.log('ingest expects piped input');
+      return resolve();
     }
+
+    process.stdin.setEncoding('utf8');
+
+    const rl = readline.createInterface({ input: process.stdin });
+
+    rl.on('line', async (line) => {
+      try {
+        await tracktastic.ingest(folderPath, JSON.parse(line));
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    rl.on('error', reject);
   });
+}
 
-  rl.on('error', reject);
-});
-
-const main = async () => {
+async function main() {
   try {
     if (shouldIngest) {
       await ingest();
@@ -47,6 +49,7 @@ const main = async () => {
     }
   } catch (e) {
     console.log(e);
+    process.exit(1);
   }
 }
 
