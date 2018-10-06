@@ -7,7 +7,7 @@ module.exports = {
       file: 'README.md'
     }, {
       file: 'ANOTHER.md',
-      options: {
+      reporterOptions: {
         title: 'Custom Title',
         maxRows: 40,
       }

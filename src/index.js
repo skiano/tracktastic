@@ -37,11 +37,11 @@ exports.report = async (folder) => {
     config = Object.assign({
       file: 'README.md',
       reporter: require('./report'), // make this variable
-      options: {},
+      reporterOptions: {},
     }, reportOptions);
 
     const out = path.resolve(folder, config.file);
-    const reportString = config.reporter(dataSet, config.options);
+    const reportString = config.reporter(dataSet, config.reporterOptions);
 
     await writeFile(out, reportString);
   }))
