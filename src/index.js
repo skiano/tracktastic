@@ -14,14 +14,28 @@ exports.ingest = async (folder, marks) => {
   const now = timestamp.create();
   const log = path.resolve(folder, LOG_NAME);
   const data = Array.isArray(marks) ? marks : [marks];
-  const dataWithTime = data.map(m => Object.assign(m, { time: now }))
-  await logFile.append(log, dataWithTime, options);
+
+  const finnessedMarks = data.map((mark) => {
+    const type = options.createType(mark);
+
+    return {
+      time: now,
+      name: options.createName(mark.name, type),
+      unit: options.createUnit(mark.unit, type),
+      value: options.createValue(mark.value, type),
+    };
+  });
+
+  await logFile.append(log, finnessedMarks);
 };
 
 exports.report = async (folder) => {
   const options = getOptions(folder).report;
   const log = path.resolve(folder, LOG_NAME);
-  const out = path.resolve(folder, 'README.md');
   const dataSet = await logFile.read(log);
-  await writeFile(out, report(dataSet, options));
+
+  await Promise.all(options.output.map(async (reportOptions) => {
+    const out = path.resolve(folder, reportOptions.name || 'README.md');
+    await writeFile(out, report(dataSet, reportOptions));
+  }))
 };

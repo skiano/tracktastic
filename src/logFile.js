@@ -36,18 +36,9 @@ const validateMark = (mark) => {
   }
 };
 
-const appendToLogFile = async (logFile, marks, options) => {
+const appendToLogFile = async (logFile, marks) => {
   const str = marks.map((mark) => {
-    const type = options.createType(mark);
-
-    const finessedMark = {
-      time: mark.time,
-      name: options.createName(mark.name, type),
-      unit: options.createUnit(mark.unit, type),
-      value: options.createValue(mark.value, type),
-    };
-
-    validateMark(finessedMark);
+    validateMark(mark);
 
     return [
       toBase64(mark.name),
