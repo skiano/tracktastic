@@ -1,6 +1,11 @@
+const identity = _ => _;
+
 module.exports = {
   ingest: {
-    createName: name => name,
+    createType: mark => mark.type,
+    createName: identity,
+    createUnit: identity,
+    createValue: identity
   },
   report: {
     output: [
