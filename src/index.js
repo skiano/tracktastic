@@ -34,14 +34,14 @@ exports.report = async (folder) => {
   const dataSet = await logFile.read(log);
 
   await Promise.all(options.output.map(async (reportOptions) => {
-    reportOptions = Object.assign({
+    config = Object.assign({
       file: 'README.md',
-      title: 'Tracktastic',
-      reporter: require('./report') // make this variable
+      reporter: require('./report'), // make this variable
+      options: {},
     }, reportOptions);
 
-    const out = path.resolve(folder, reportOptions.file);
-    const reportString = reportOptions.reporter(dataSet, reportOptions);
+    const out = path.resolve(folder, config.file);
+    const reportString = config.reporter(dataSet, config.options);
 
     await writeFile(out, reportString);
   }))

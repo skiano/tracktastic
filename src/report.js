@@ -76,6 +76,7 @@ const makeSingleTable = (name, values, maxLineLength) => {
 
 const reportMarkdown = (dataSet, options) => {
   options = Object.assign({
+    title: 'Tracktastic!',
     maxRows: 10,
     maxColumns: 3,
     barLength: 15,
